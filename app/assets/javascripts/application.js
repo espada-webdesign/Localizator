@@ -16,3 +16,5 @@
 //= require map
 //= require_tree
 //= require map
+//= require jquery
+//= require jquery_ujs

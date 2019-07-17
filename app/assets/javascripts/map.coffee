@@ -118,15 +118,23 @@ locations.forEach (element) ->
   return
 data.forEach (element) ->
   side = document.getElementsByClassName('side')[0]
-  div = document.createElement('div')
-  div.classList.add 'rowitem'
-  div.appendChild document.createTextNode(element[3])
-  side.appendChild div
+  # div = document.createElement('div')
+  # div.classList.add 'rowitem'
+  # div.appendChild document.createTextNode(element[3])
+  # side.appendChild div
   markers.push L.marker([
     element[8]
     element[9]
   ]).addTo(map).bindPopup('<b class=title>' + element[3] + '</b><br>' + element[4] + '<br>' + element[6] + '<br>' + element[7])
   return
+
+$ ->
+  $('div.rowitem' ).each ->
+     markers.push L.marker([
+       $(this).attr("latitude")
+       $(this).attr("longitude")
+    ]).addTo(map).bindPopup($(this).text())
+
 popup = L.popup()
 
 # ---

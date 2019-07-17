@@ -16,10 +16,15 @@
       %a(href="#") Link
       %a.right(href="#") Link
     .row
-      .side
-        .rowitem
-          Item1
-      .main
-        / div musi mit specifikovanou vysku v css
-        #mapid
+      .row_content
+        .side
+
+          - @ps_stores.each do |store|
+            .rowitem{:latitude=>store.latitude, :longitude=>store.longitude}
+              = store.name
+
+        .main
+          / div musi mit specifikovanou vysku v css
+          #mapid
+          
     = javascript_include_tag "application"

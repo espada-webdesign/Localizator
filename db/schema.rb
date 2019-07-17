@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_093659) do
     t.string "address2"
     t.string "city"
     t.string "postcode"
-    t.decimal "lalitude", precision: 13, scale: 8
+    t.decimal "latitude", precision: 13, scale: 8
     t.decimal "longitude", precision: 13, scale: 8
     t.string "hours"
     t.string "phone"

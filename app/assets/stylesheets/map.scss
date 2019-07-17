@@ -45,11 +45,15 @@
     flex-grow : 1;
 }
 
+.row_content{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      overflow: hidden;
+}
+
   /* Column container */
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
     height: 93.5vh;
 }
 
@@ -94,10 +98,13 @@
 
 #mapid {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin:0px;
+    padding: 0px;
+
 }
 body{
     height: 100%;
     margin: 0;
+    overflow: hidden;
 }
