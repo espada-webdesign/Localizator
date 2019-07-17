@@ -2,7 +2,7 @@
 
 This is a ruby on rails website
 
-Ruby version: ruby 2.6.0p0
+Ruby version: ruby '2.5.1'
 
 Used gems:
   1. hamlit

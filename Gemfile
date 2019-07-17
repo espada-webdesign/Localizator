@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.1'
+ruby '2.5.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
@@ -35,6 +35,18 @@ gem 'jbuilder', '~> 2.5'
 gem "rename"
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+gem "haml-rails", "~> 2.0"
+
+gem 'materialize-sass', '~> 1.0.0'
+
+gem 'material_icons'
+
+gem 'i18n-tasks', '~> 0.9.29'
+
+gem "audited", "~> 4.7"
+
+gem "table_print"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

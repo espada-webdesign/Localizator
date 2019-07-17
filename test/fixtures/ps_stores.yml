@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_store: 1
+  id_country: 1
+  id_state: 1
+  name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  postcode: MyString
+  lalitude: 9.99
+  longitude: 9.99
+  hours: MyString
+  phone: MyString
+  fax: MyString
+  email: MyString
+  note: MyText
+  active: 
+  layer: MyString
+  date_add: 2019-07-17 11:56:13
+  date_upd: 2019-07-17 11:56:13
+
+two:
+  id_store: 1
+  id_country: 1
+  id_state: 1
+  name: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  postcode: MyString
+  lalitude: 9.99
+  longitude: 9.99
+  hours: MyString
+  phone: MyString
+  fax: MyString
+  email: MyString
+  note: MyText
+  active: 
+  layer: MyString
+  date_add: 2019-07-17 11:56:13
+  date_upd: 2019-07-17 11:56:13
