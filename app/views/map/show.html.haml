@@ -1,0 +1,5 @@
+%li.control-group.nested-fields
+  .controls
+    = f.input :quantity
+    = f.select :part_id, options_from_collection_for_select(Thing.all, :id, :name), {:prompt => "Select or create a part..."}, {class => "construction_part_select"}
+    = link_to_remove_association "remove", f

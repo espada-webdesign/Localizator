@@ -4,12 +4,10 @@ class MapController < ApplicationController
     @ps_stores = PsStore.all
   end
 
-  def show
-    @ps_store = PsStore.find(params[:id])
+  def test
   end
 
-  def new
-    @ps_store = PsStore.new
+  def show
   end
 
 end

@@ -14,7 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require map
-//= require_tree
-//= require map
 //= require jquery
 //= require jquery_ujs
+//= require selectize
+//= require_tree .

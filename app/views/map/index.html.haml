@@ -13,18 +13,34 @@
     .navbar
       %a(href="#") Link
       %a(href="#") Link
-      %a(href="#") Link
       %a.right(href="#") Link
     .row
-      .row_content
-        .side
-
+      .side_column_content
+        .selectize
+          .selectize-control.demo-default.multi
+            .selectize-input.items.not-full.has-options.has-items
+              .item{"data-value" => "awesome"} awesome
+              %input#input-tags-selectized{:autocomplete => "off", :tabindex => "", :type => "text"}/
+          .selectize-dropdown.multi.demo-default
+            .selectize-dropdown-content
+              .option{"data-selectable" => "", "data-value" => "neat"} neat
+        .side_bar
+          -i = 1
           - @ps_stores.each do |store|
-            .rowitem{:latitude=>store.latitude, :longitude=>store.longitude}
-              = store.name
+            %div.rowitem{:id =>i, :latitude=>store.latitude, :longitude=>store.longitude}
+              -i = i + 1
+              .rowitem_content
+                %h1
+                  = store.name
+                %ul.store
+                  %li.address
+                    = store.address1
+                  %li.city
+                    = store.city
+                    = store.postcode
 
-        .main
-          / div musi mit specifikovanou vysku v css
-          #mapid
-          
+      .main
+        / div musi mit specifikovanou vysku v css
+        #mapid
+
     = javascript_include_tag "application"

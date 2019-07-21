@@ -33,8 +33,28 @@
     box-sizing: border-box;
 }
 
-.content_conteiner {
+#input-tags-selectized{
+  width: 4px;
+  opacity: 1;
+  position: relative;
+  left: 0px;
+  padding: 0px;
+}
 
+.selectize-dropdown.multi.demo-default{
+  display: none;
+  width: 520px;
+  // top: 36px;
+  left: 0px;
+  visibility: visible;
+  padding: 0px;
+}
+
+.selectize{
+  background-color: #f1f1f1;
+}
+
+.content_conteiner {
     display: flex;
     flex-flow: column;
     height: 100%;
@@ -55,27 +75,63 @@
   /* Column container */
 .row {
     height: 93.5vh;
+    display: flex;
 }
 
 .rowitem{
     width: 100%;
-    height: 30px;
-    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
     margin: 0px;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid black;
+    transition: all;
+}
+
+.rowitem:hover{
+  background-color: #e1e0e0;
+}
+
+.rowitem h1{
+  margin: 0px;
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #7dae12;
+}
+
+ul.store{
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 300;
+  color: #555;
+  margin-bottom: 0px;
 }
 
   /* Create two unequal columns that sits next to each other */
   /* Sidebar/left column */
-.side {
-    flex: 20%; /* Set the width of the sidebar */
+.side_bar {
+    height: 100%;
     background-color: #f1f1f1; /* Grey background color */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.side_column_content{
+      flex: 25%; /* Set the width of the sidebar */
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 
   /* Main column */
 .main {
-    flex: 80%; /* Set the width of the main content */
+    flex: 75%; /* Set the width of the main content */
     background-color: white; /* White background color */
 }
 
@@ -94,11 +150,9 @@
     }
   }
 
-
-
 #mapid {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     margin:0px;
     padding: 0px;
 
@@ -106,5 +160,7 @@
 body{
     height: 100%;
     margin: 0;
+    margin-left: 20px;
+    margin-right: 20px;
     overflow: hidden;
 }

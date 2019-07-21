@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  *= require material_icons
+ *= require selectize
+ *= require selectize.default
 
  */
 @import "materialize";
+@import 'selectize';
+@import 'selectize.bootstrap3';
