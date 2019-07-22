@@ -24,7 +24,7 @@
         .side_bar
           -i = 1
           - @ps_stores.each do |store|
-            %div.rowitem{:id =>i, :latitude=>store.latitude, :longitude=>store.longitude, :address=>store.address1, :city=>store.city}
+            %div.rowitem{:index =>i, :latitude=>store.latitude, :longitude=>store.longitude, :address=>store.address1, :city=>store.city, :name=>store.name, :country=>store.id_country}
               -i = i + 1
               .rowitem_content
                 %h1

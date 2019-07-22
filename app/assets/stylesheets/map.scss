@@ -12,7 +12,11 @@
     background-color: #333; /* Dark background color */
     margin: 0px;
 }
-
+body{
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
 .search-wrapper{
   display: flex;
   flex-direction:row;
@@ -102,8 +106,10 @@ i.material-icons{
 
   /* Column container */
 .row {
-    height: 93.5vh;
+    height: 95vh;
     display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .rowitem{
@@ -184,11 +190,4 @@ ul.store{
     margin:0px;
     padding: 0px;
 
-}
-body{
-    height: 100%;
-    margin: 0;
-    margin-left: 20px;
-    margin-right: 20px;
-    overflow: hidden;
 }

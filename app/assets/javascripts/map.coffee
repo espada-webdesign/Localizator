@@ -18,7 +18,7 @@ $('document').on 'turbolinks:load', ->
     })
   return
 
-# https://account.mapbox.com/access-tokens/ request access token
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFydHljYXNoZXciLCJhIjoiY2p3bzBwa2NiMmQyczQ5bzIwenFrbWNmYiJ9.8vHaT7NMz3mszqg9uqu9hw',
   maxZoom: 18
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' + '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
@@ -26,7 +26,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 $ ->
   $('div.rowitem' ).each ->
-     markers[$(this).attr("id")] = L.marker([
+     markers[$(this).attr("index")] = L.marker([
        $(this).attr("latitude")
        $(this).attr("longitude")
     ]).addTo(map).bindPopup("<b>" + $(this).text() + "</b><br>"+$(this).attr("address")+ "<br>" +$(this).attr("city"))
@@ -38,41 +38,35 @@ $ ->
       $(this).attr("latitude")
       $(this).attr("longitude")
       ], 15)
-    window.markers[parseInt($(this).attr("id"))].openPopup()
+    window.markers[parseInt($(this).attr("index"))].openPopup()
+
+search_stores = (text) ->
+  if(!!text)
+    text = text.toLowerCase()
+    $('div.rowitem' ).each ->
+      $(this).addClass "hidden"
+      map.removeLayer markers[$(this).attr("index")]
+      str = $(this).attr("address") + " " + $(this).attr("city") + " " +  $(this).attr("name")
+      str = str.toLowerCase()
+      if str.includes text
+        $(this).removeClass "hidden"
+        map.addLayer markers[$(this).attr("index")]
+  else
+    $('.hidden').each ->
+      $(this).removeClass "hidden"
+      map.addLayer markers[$(this).attr("index")]
 
 $ ->
   $('i.material-icons').click ->
       text = $('#search').val()
-      if(!!text)
-        $('div.rowitem' ).each ->
-          $(this).addClass "hidden"
-          map.removeLayer markers[$(this).attr("id")]
-          if text in $(this).attr("address") || text in $(this).attr("city")
-            $(this).removeClass "hidden"
-            map.addLayer markers[$(this).attr("id")]
-            # markers[$(this).attr("id")].addTo(map).bindPopup("<b>" + $(this).text() + "</b><br>"+$(this).attr("address")+ "<br>" +$(this).attr("city"))
-      else
-        $('.hidden').each ->
-          $(this).removeClass "hidden"
-          map.addLayer markers[$(this).attr("id")]
+      search_stores text
 
 $('#search').on 'keyup', (e) ->
   text = $('#search').val()
   if e.keyCode == 13
-    if(!!text)
-      $('div.rowitem' ).each ->
-        $(this).addClass "hidden"
-        map.removeLayer markers[$(this).attr("id")]
-        if text in $(this).attr("address") || text in $(this).attr("city")
-          $(this).removeClass "hidden"
-          map.addLayer markers[$(this).attr("id")]
-          # markers[$(this).attr("id")].addTo(map).bindPopup("<b>" + $(this).text() + "</b><br>"+$(this).attr("address")+ "<br>" +$(this).attr("city"))
-    else
-      $('.hidden').each ->
-        $(this).removeClass "hidden"
-        map.addLayer markers[$(this).attr("id")]
-
-  else
+    search_stores text
+  else if !(!!text)
+    search_stores text
   return
 
 popup = L.popup()
