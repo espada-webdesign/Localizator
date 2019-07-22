@@ -1,0 +1,7 @@
+<%= form_with model: @ps_store do |f| %>
+
+  <div class="form_group">
+    <%= f.label :city, "City:" %>
+    <%= f.select :city, PsStore.order(:city), :name, :city, {}, {multiple:true, class: "selectize"} %>
+  </div>
+<% end %>

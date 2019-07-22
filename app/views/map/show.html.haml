@@ -1,5 +1,11 @@
-%li.control-group.nested-fields
-  .controls
-    = f.input :quantity
-    = f.select :part_id, options_from_collection_for_select(Thing.all, :id, :name), {:prompt => "Select or create a part..."}, {class => "construction_part_select"}
-    = link_to_remove_association "remove", f
+.side_column_content
+  .selectize_div
+    .selectize-control.demo-default.multi
+      .selectize-input.items.not-full.has-options.has-items
+        .item{"data-value" => "awesome"} awesome
+        %input#input-tags-selectized.selectize{:autocomplete => "off", :tabindex => "", :type => "text"}/
+    .selectize-dropdown.multi.demo-default
+      .selectize-dropdown-content
+        .option{"data-selectable" => "", "data-value" => "neat"} neat
+
+= render 'form'

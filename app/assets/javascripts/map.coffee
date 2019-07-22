@@ -4,11 +4,19 @@
 
 
 window.markers = []
+window.divs = []
 window.map = L.map('mapid').setView([
   49.7
   15.5
 ], 8)
 
+
+$('document').on 'turbolinks:load', ->
+  $('.selectize').selectize({
+        create: true,
+    sortField: 'text'
+    })
+  return
 
 # https://account.mapbox.com/access-tokens/ request access token
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFydHljYXNoZXciLCJhIjoiY2p3bzBwa2NiMmQyczQ5bzIwenFrbWNmYiJ9.8vHaT7NMz3mszqg9uqu9hw',
@@ -22,7 +30,7 @@ $ ->
        $(this).attr("latitude")
        $(this).attr("longitude")
     ]).addTo(map).bindPopup($(this).text())
-      
+    divs.push $(this)
 
 $ ->
   $('div.rowitem').click ->
@@ -31,6 +39,22 @@ $ ->
       $(this).attr("longitude")
       ], 15)
     window.markers[parseInt($(this).attr("id"))].openPopup()
+
+$('#search').on 'keyup', (e) ->
+  debugger
+  text = $('#search').val()
+  if e.keyCode == 13
+    if(!!text)
+      $('div.rowitem' ).each ->
+        $(this).addClass "hidden"
+        if text in $(this).attr("address") || text in $(this).attr("city")
+          $(this).removeClass "hidden"
+    else
+      $('.hidden') ->
+        $(this).removeClass "hidden"
+
+  else
+  return
 
 popup = L.popup()
 L.Map.invalidateSize();

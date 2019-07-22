@@ -11,23 +11,20 @@
     %script(crossorigin="" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js")
   %body
     .navbar
-      %a(href="#") Link
-      %a(href="#") Link
-      %a.right(href="#") Link
+      %a(href="#") Město
+      %a(href="#") Řetězec
+      %a.right(href="#") Home page
     .row
       .side_column_content
-        .selectize
-          .selectize-control.demo-default.multi
-            .selectize-input.items.not-full.has-options.has-items
-              .item{"data-value" => "awesome"} awesome
-              %input#input-tags-selectized{:autocomplete => "off", :tabindex => "", :type => "text"}/
-          .selectize-dropdown.multi.demo-default
-            .selectize-dropdown-content
-              .option{"data-selectable" => "", "data-value" => "neat"} neat
+        .search-wrapper
+          %input#search{:placeholder => "Search"}/
+          %i.material-icons search
+          .search-results
+
         .side_bar
           -i = 1
           - @ps_stores.each do |store|
-            %div.rowitem{:id =>i, :latitude=>store.latitude, :longitude=>store.longitude}
+            %div.rowitem{:id =>i, :latitude=>store.latitude, :longitude=>store.longitude, :address=>store.address1, :city=>store.city}
               -i = i + 1
               .rowitem_content
                 %h1

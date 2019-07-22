@@ -2,9 +2,37 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 /* Style the top navigation bar */
+
+@import "materialize";
+@import 'selectize';
+@import 'selectize.bootstrap3';
+
 .navbar {
     overflow: hidden; /* Hide overflow */
     background-color: #333; /* Dark background color */
+    margin: 0px;
+}
+
+.search-wrapper{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: nowrap;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+input#search{
+  background-color: #fff;
+  pading:5px;
+}
+
+.rowitem.hidden{
+  display: none;
+}
+
+i.material-icons{
+  font-size: 3rem;
+  cursor: pointer;
 }
 
   /* Style the navigation bar links */

@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require map
@@ -18,3 +17,9 @@
 //= require jquery_ujs
 //= require selectize
 //= require_tree .
+
+$('#input-tags').selectize({
+  persist: false,
+  createOnBlur: true,
+  create: true
+});
