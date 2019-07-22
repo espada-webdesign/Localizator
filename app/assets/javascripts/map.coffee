@@ -29,7 +29,7 @@ $ ->
      markers.push L.marker([
        $(this).attr("latitude")
        $(this).attr("longitude")
-    ]).addTo(map).bindPopup($(this).text())
+    ]).addTo(map).bindPopup("<b>" + $(this).text() + "</b><br>"+$(this).attr("address")+ "<br>" +$(this).attr("city"))
     divs.push $(this)
 
 $ ->
@@ -40,8 +40,19 @@ $ ->
       ], 15)
     window.markers[parseInt($(this).attr("id"))].openPopup()
 
+$ ->
+  $('i.material-icons').click ->
+      text = $('#search').val()
+      if(!!text)
+        $('div.rowitem' ).each ->
+          $(this).addClass "hidden"
+          if text in $(this).attr("address") || text in $(this).attr("city")
+            $(this).removeClass "hidden"
+      else
+        $('.hidden').each ->
+          $(this).removeClass "hidden"
+
 $('#search').on 'keyup', (e) ->
-  debugger
   text = $('#search').val()
   if e.keyCode == 13
     if(!!text)
@@ -50,7 +61,7 @@ $('#search').on 'keyup', (e) ->
         if text in $(this).attr("address") || text in $(this).attr("city")
           $(this).removeClass "hidden"
     else
-      $('.hidden') ->
+      $('.hidden').each ->
         $(this).removeClass "hidden"
 
   else
