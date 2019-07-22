@@ -49,11 +49,12 @@ $ ->
           map.removeLayer markers[$(this).attr("id")]
           if text in $(this).attr("address") || text in $(this).attr("city")
             $(this).removeClass "hidden"
-            debugger
-            markers[$(this).attr("id")].addTo(map).bindPopup("<b>" + $(this).text() + "</b><br>"+$(this).attr("address")+ "<br>" +$(this).attr("city"))
+            map.addLayer markers[$(this).attr("id")]
+            # markers[$(this).attr("id")].addTo(map).bindPopup("<b>" + $(this).text() + "</b><br>"+$(this).attr("address")+ "<br>" +$(this).attr("city"))
       else
         $('.hidden').each ->
           $(this).removeClass "hidden"
+          map.addLayer markers[$(this).attr("id")]
 
 $('#search').on 'keyup', (e) ->
   text = $('#search').val()
