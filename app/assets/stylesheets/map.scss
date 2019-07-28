@@ -22,7 +22,6 @@ body{
   flex-direction:row;
   flex-wrap: nowrap;
   align-items: center;
-  background-color: #f1f1f1;
 }
 
 input#search{
@@ -40,13 +39,44 @@ i.material-icons{
   cursor: pointer;
   background: white;
   height: 100%;
+  transition: 0.5s;
 }
 
-  /* Style the navigation bar links */
+div.search-icon-container{
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+i.material-icons:hover{
+  transform: scale(1.15);
+}
+
+form#search-form {
+  width: 100%;
+  position: relative;
+}
+
+button.close {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  border: none;
+  background: transparent;
+  text-align: center;
+  cursor: pointer;
+}
+
+#search:not(:valid) ~ .close {
+  display: none;
+}
+
+/* Style the navigation bar links */
 .navbar a {
     float: left; /* Make sure that the links stay side-by-side */
     display: block; /* Change the display to block, for responsive reasons (see below) */
-    color: white; /* White text color */
+    color: #bd8f3a; /* White text color */
     text-align: center; /* Center the text */
     padding: 14px 20px; /* Add some padding */
     text-decoration: none; /* Remove underline */
@@ -125,13 +155,14 @@ i.material-icons{
     text-align: left;
     box-shadow: 0 3px 3px #dcdcdc;
     margin-bottom: 10px;
-    transition: all;
+    transition: .25s;
     background-color: #f9f9f9; /* Grey background color */
 }
 
 .rowitem:hover{
   background-color: #e1e0e0;
   cursor: pointer;
+  transform: scale(1.015);
 }
 
 .rowitem h1{

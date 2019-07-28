@@ -17,8 +17,11 @@
     .row
       .side_column_content
         .search-wrapper
-          %input#search{:placeholder => "Hledat..."}/
-          %i.material-icons search
+          %form#search-form
+            %input#search{:placeholder => "Hledat...", :required => true}/
+            %button.close{:type => "reset"}X
+          .search-icon-container
+            %i.material-icons search
           .search-results
 
         .side_bar
