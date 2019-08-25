@@ -16,13 +16,6 @@
 //= require selectize
 //= require_tree .
 
-/*
-$('#search').selectize({
-  persist: false,
-  createOnBlur: true,
-  create: true
-});
-*/
 
 document.addEventListener('turbolinks:load', function() {
    $('#search').selectize({
@@ -48,7 +41,8 @@ document.addEventListener('turbolinks:load', function() {
        });
      },
      onChange: function(){
-       updateSelectedPacketery();
+       var text = $('#search').val();
+       window.search_stores(text);
      }
    });
 
