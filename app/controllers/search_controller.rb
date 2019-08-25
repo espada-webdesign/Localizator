@@ -1,11 +1,11 @@
 class SearchController < ApplicationController
    LIMIT = 10
-   def packetery
+   def show
      t = params[:term]+'%'
-     branches = PacketeryBranch.where('id like ? or street like ? or
-city like ? or zip like ?', t, t, t, t).limit(LIMIT)
-
-     render json: branches.map{|c| {id: c.id, street: c.street, city:
-c.city, zip: c.zip, title: [c.id,c.street,c.city,c.zip].join(' - ')}}
+     branches = PsStore.where('name like ? or address1 like ? or
+city like ? or postcode like ?', t, t, t, t).limit(LIMIT)
+     p branches.map
+     render json: branches.map{|c| {name: c.name, address1: c.address1, city:
+c.city, postcode: c.postcode, title: [c.name,c.address1,c.city,c.postcode].join(' - ')}}
    end
 end
