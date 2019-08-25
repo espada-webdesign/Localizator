@@ -34,6 +34,8 @@ $ ->
 
 $ ->
   $('div.rowitem').click ->
+    $('.selected-store').removeClass "selected-store"
+    $(this).addClass("selected-store")
     map.setView([
       $(this).attr("latitude")
       $(this).attr("longitude")
