@@ -42,27 +42,27 @@ window.load = () ->
         ], 15)
       window.markers[parseInt($(this).attr("index"))].openPopup()
 
-  search_stores = (text) ->
+  window.search_stores = (text) ->
     if(!!text)
       text = text.toLowerCase()
       $('div.rowitem' ).each ->
         $(this).addClass "hidden"
         map.removeLayer markers[$(this).attr("index")]
-        str = $(this).attr("address") + " " + $(this).attr("city") + " " +  $(this).attr("name")
+        str = $(this).attr("name") + " - " + $(this).attr("address") + " - " +  $(this).attr("city") + " - " +  $(this).attr("postcode")
         str = str.toLowerCase()
-        if str.includes text
+        if text.includes str
           $(this).removeClass "hidden"
           map.addLayer markers[$(this).attr("index")]
     else
       $('.hidden').each ->
         $(this).removeClass "hidden"
         map.addLayer markers[$(this).attr("index")]
-
+  ###
   $ ->
     $('i.material-icons').click ->
         text = $('#search').val()
         search_stores text
-
+  ###
   $('#search').on 'keyup', (e) ->
     text = $('#search').val()
     if e.keyCode == 13

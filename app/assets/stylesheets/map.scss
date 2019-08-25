@@ -4,7 +4,6 @@
 /* Style the top navigation bar */
 
 @import "materialize";
-@import 'selectize';
 @import 'selectize.bootstrap3';
 
 .navbar {
@@ -28,6 +27,7 @@ input#search{
   background-color: #fff;
   pading:5px;
   margin: 0;
+  display: none;
 }
 
 .rowitem.hidden{
@@ -115,6 +115,10 @@ button.close {
   padding: 0px;
 }
 
+.selectize-dropdown-content {
+    cursor: default;
+}
+
 .selectize{
   background-color: #f1f1f1;
 }
@@ -198,6 +202,7 @@ ul.store{
 .side_column_content{
   flex: 25%; /* Set the width of the sidebar */
   margin-top: 10px;
+  margin-right: 10px;
 }
 
 ::-webkit-scrollbar {
