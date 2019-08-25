@@ -14,6 +14,7 @@
 //= require jquery
 //= require selectize
 //= require_tree .
+//= stub zload 
 
 /*
 $('#search').selectize({
