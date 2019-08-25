@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require activestorage
-//= require map
 //= require jquery
 //= require selectize
 //= require_tree .
