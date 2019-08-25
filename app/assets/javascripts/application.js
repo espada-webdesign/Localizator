@@ -11,10 +11,8 @@
 // about supported directives.
 //
 //= require activestorage
-//= require turbolinks
 //= require map
 //= require jquery
-//= require jquery_ujs
 //= require selectize
 //= require_tree .
 
@@ -22,4 +20,44 @@ $('#input-tags').selectize({
   persist: false,
   createOnBlur: true,
   create: true
+});
+
+document.addEventListener('turbolinks:load', function() {
+   $('#select-packetery-branch').selectize({
+     debugger;
+     valueField: 'title',
+     labelField: 'title',
+     searchField: 'title',
+     placeholder: 'začněte psát adresu',
+     create: false,
+     onInitialize: function() {
+       selectize = this;
+
+     },
+     load: function(query, callback) {
+       if (!query.length) return callback();
+       $.ajax({
+         url: '/search/packetery?term=' + encodeURIComponent(query),
+         type: 'GET',
+         error: function() {
+           callback();
+         },
+         success: function(res) {
+           callback(res);
+         }
+       });
+     },
+     onChange: function(){
+       updateSelectedPacketery();
+     }
+   });
+
+   document.addEventListener("turbolinks:before-cache", function() {
+     $('body').find("select").each(function(){
+       if ($(this)[0].selectize) {
+          $(this)[0].selectize.destroy();
+       }
+     });
+   });
+
 });
