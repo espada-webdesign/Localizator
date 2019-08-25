@@ -169,6 +169,10 @@ button.close {
   transform: scale(1.015);
 }
 
+.rowitem:hover li{
+  color: #555; 
+}
+
 .rowitem h1{
   margin: 0px;
   margin-top: 6px;
@@ -233,4 +237,12 @@ ul.store{
     margin:0px;
     padding: 0px;
 
+}
+
+.selected-store{
+  background-color: gray;
+}
+
+.selected-store li{
+  color: white;
 }
