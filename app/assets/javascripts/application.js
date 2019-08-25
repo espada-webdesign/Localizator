@@ -16,28 +16,28 @@
 //= require selectize
 //= require_tree .
 
-$('#input-tags').selectize({
+/*
+$('#search').selectize({
   persist: false,
   createOnBlur: true,
   create: true
 });
+*/
 
 document.addEventListener('turbolinks:load', function() {
-   $('#select-packetery-branch').selectize({
-     debugger;
+   $('#search').selectize({
      valueField: 'title',
      labelField: 'title',
      searchField: 'title',
-     placeholder: 'začněte psát adresu',
+     placeholder: 'Začněte psát adresu...',
      create: false,
      onInitialize: function() {
        selectize = this;
-
      },
      load: function(query, callback) {
        if (!query.length) return callback();
        $.ajax({
-         url: '/search/packetery?term=' + encodeURIComponent(query),
+         url: '/search/show?term=' + encodeURIComponent(query),
          type: 'GET',
          error: function() {
            callback();
