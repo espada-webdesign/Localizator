@@ -25,12 +25,19 @@ window.load = () ->
     id: 'mapbox.streets').addTo map
 
   $ ->
-    $('div.rowitem' ).each ->
-       markers[$(this).attr("index")] = L.marker([
-         $(this).attr("latitude")
-         $(this).attr("longitude")
-      ]).addTo(map).bindPopup("<b>" + $(this).attr("name") + "</b><br>"+$(this).attr("address")+ "<br>" +$(this).attr("city"))
-      divs.push $(this)
+    $('div.rowitem').each ->
+      pop_index = $(this).attr('index')
+      markers[$(this).attr('index')] = L.marker([
+        $(this).attr('latitude')
+        $(this).attr('longitude')
+      ]).addTo(map).bindPopup('<b>' + $(this).attr('name') + '</b><br>' + $(this).attr('address') + '<br>' + $(this).attr('city')).on('popupopen', (popup) ->
+        $('div.rowitem[index="' + pop_index + '"]').addClass('selected-store')
+        $('div.side_bar').scrollTo('div.rowitem[index=' + pop_index + ']');
+        return
+      ).on 'popupclose', (popup) ->
+        $('div.rowitem').removeClass('selected-store')
+        return
+    divs.push $(this)
 
   $ ->
     $('div.rowitem').click ->
@@ -57,6 +64,11 @@ window.load = () ->
       $('.hidden').each ->
         $(this).removeClass "hidden"
         map.addLayer markers[$(this).attr("index")]
+
+  jQuery.fn.scrollTo = (elem, speed) ->
+    $(this).animate { scrollTop: $(this).scrollTop() - ($(this).offset().top) + $(elem).offset().top }, if speed == undefined then 1000 else speed
+    this
+
   ###
   $ ->
     $('i.material-icons').click ->
