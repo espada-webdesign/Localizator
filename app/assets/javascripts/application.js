@@ -114,24 +114,20 @@ document.addEventListener('turbolinks:load', function() {
          }, 500);
 
        });
+       var $select = $("#search").selectize();
+       var control = $select[0].selectize;
+       $.each($('.rowitem'), function( index, field ) {
+         control.addOption({
+          id: $(field).attr('index'),
+          title: $(field).attr('name') + ' ' + $(field).attr('address') + ' ' + $(field).attr('city') +  ' ' + $(field).attr('postcode'),
+        });
+       });
      },
      render: {
         option_create: function(data, escape) {
           return '<div class="create option">Hledat <strong>' + escape(data.input) + '</strong>&hellip;</div>';
         }
       },
-     load: function(query, callback) {
-       $.ajax({
-         url: '/search/show?term=' + encodeURIComponent(query),
-         type: 'GET',
-         error: function() {
-           callback();
-         },
-         success: function(res) {
-           callback(res);
-         }
-       });
-     },
      onType: function (str) {
           if (str === "") {
               this.close();
@@ -145,7 +141,7 @@ document.addEventListener('turbolinks:load', function() {
       if (!this.lastQuery.length) {
         this.close();
       }
-    },
+     },
      onFocus: function (){
         var value = this.getValue();
         if (value.length > 0) {

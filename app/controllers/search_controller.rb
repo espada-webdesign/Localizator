@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
    LIMIT = 10
    def show
-     t = params[:term]+'%'
+     t = '%' + params[:term].sub(' ','% %') + '%'
      branches = PsStore.where('name like ? or address1 like ? or
 city like ? or postcode like ?', t, t, t, t).limit(LIMIT)
      p branches.map
