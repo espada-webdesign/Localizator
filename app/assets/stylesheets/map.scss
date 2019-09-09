@@ -246,3 +246,13 @@ ul.store{
 .selected-store li{
   color: white;
 }
+
+.selectize-control.multi .selectize-input div.item[data-value] {
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+#search-selectized {
+  width: 100% !important;
+}
