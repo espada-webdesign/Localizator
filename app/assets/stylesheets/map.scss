@@ -34,6 +34,10 @@ input#search{
   display: none;
 }
 
+.hidden{
+  display: none;
+}
+
 i.material-icons{
   font-size: 3rem;
   cursor: pointer;
@@ -130,7 +134,6 @@ button.close {
 }
 
 .content {
-
     flex-grow : 1;
 }
 
@@ -170,15 +173,23 @@ button.close {
 }
 
 .rowitem:hover li{
-  color: #555; 
+  color: #555;
 }
 
-.rowitem h1{
+.rowitem h3{
   margin: 0px;
   margin-top: 6px;
   font-size: 16px;
   font-weight: 700;
   color: #7dae12;
+}
+
+.side-bar h2{
+  font-size: 3rem;
+}
+
+.side-bar h2:first-child{
+  margin-top: 0px;
 }
 
 ul.store{
@@ -192,17 +203,19 @@ ul.store{
 
   /* Create two unequal columns that sits next to each other */
   /* Sidebar/left column */
-.side_bar {
+.side-bar {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 15px;
 }
 
-.side_column_content{
+.side-column-content{
   flex: 25%; /* Set the width of the sidebar */
   margin-top: 10px;
   margin-right: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 ::-webkit-scrollbar {

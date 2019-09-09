@@ -14,7 +14,7 @@ window.load = () ->
   $('document').on 'turbolinks:load', ->
     $('.selectize').selectize({
           create: true,
-      sortField: 'text'
+          sortField: 'text'
       })
     return
 
@@ -32,7 +32,7 @@ window.load = () ->
         $(this).attr('longitude')
       ]).addTo(map).bindPopup('<b>' + $(this).attr('name') + '</b><br>' + $(this).attr('address') + '<br>' + $(this).attr('city')).on('popupopen', (popup) ->
         $('div.rowitem[index="' + pop_index + '"]').addClass('selected-store')
-        $('div.side_bar').scrollTo('div.rowitem[index=' + pop_index + ']');
+        $('div.side-bar').scrollTo('div.rowitem[index=' + pop_index + ']');
         return
       ).on 'popupclose', (popup) ->
         $('div.rowitem').removeClass('selected-store')

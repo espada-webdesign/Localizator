@@ -16,6 +16,24 @@
 //= require_tree .
 //= stub zload
 
+function refresh_layer_header(){
+  $.each($('h2.layer-header'), function( index, header ) {
+    var show_h2 = false;
+    $.each($(header).nextAll(), function( index, child ) {
+      if(!$(child).hasClass('hidden')){
+          show_h2 = true;
+          return false;
+      }
+    });
+    if(!show_h2){
+      $(header).addClass('hidden');
+    }
+    else{
+      $(header).removeClass('hidden');
+    }
+  });
+}
+
 function refresh_options(query){
   if (!query.length){
     $.each($('.rowitem'), function( index, field ) {
@@ -59,6 +77,7 @@ function refresh_options(query){
       }
     });
   }
+  refresh_layer_header();
   var defined_markers = new Array();
   for(var i = 0; i < window.markers.length; i++){
     if(window.markers[i] != undefined && window.markers[i]._map != null){

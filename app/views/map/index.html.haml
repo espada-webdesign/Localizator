@@ -2,7 +2,7 @@
 -#.navbar
   -#%a.right(href="#") Domů
 .row
-  .side_column_content
+  .side-column-content
     .search-wrapper
       %form#search-form
         %input#search{:placeholder => "Hledat...", :required => true}/
@@ -11,18 +11,23 @@
         -#%i.material-icons search
       .search-results
 
-    .side_bar
-      - @ps_stores.each do |store|
-        %div.rowitem{:index => store.id, :latitude=>store.latitude, :longitude=>store.longitude, :address=>store.address1, :city=>store.city, :name=>store.name, :country=>store.id_country, :postcode=>store.postcode}
-          .rowitem_content
-            %h1
-              = store.name
-            %ul.store
-              %li.address
-                = store.address1
-              %li.city
-                = store.city
-                = store.postcode
+    .side-bar
+      - layer = ''
+      - @ps_stores.group_by(&:layer).each do |layer, stores|
+        %div.layer-stores
+          %h2.layer-header
+            = layer
+          - stores.each do |store|
+            %div.rowitem{:index => store.id, :latitude=>store.latitude, :longitude=>store.longitude, :address=>store.address1, :city=>store.city, :name=>store.name, :country=>store.id_country, :postcode=>store.postcode}
+              .rowitem_content
+                %h3
+                  = store.name
+                %ul.store
+                  %li.address
+                    = store.address1
+                  %li.city
+                    = store.city
+                    = store.postcode
 
   .main
     / div musi mit specifikovanou vysku v css
