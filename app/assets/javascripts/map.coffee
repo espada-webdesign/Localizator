@@ -18,6 +18,29 @@ window.load = () ->
       })
     return
 
+  LeafIcon = L.Icon.extend(options:
+    shadowSize: [
+      0
+      0
+    ]
+    iconAnchor: [
+      0
+      0
+    ]
+    shadowAnchor: [
+      4
+      62
+    ]
+    popupAnchor: [
+      0
+      0
+    ])
+  store_images = new Object
+  store_images[others_key] = new LeafIcon(iconUrl: '/images/' + others_key + '.png')
+  $.each stores_names, (key, val) ->
+    path = '/images/' + key + '.png'
+    store_images[key] = new LeafIcon(iconUrl: path)
+    return
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFydHljYXNoZXciLCJhIjoiY2p3bzBwa2NiMmQyczQ5bzIwenFrbWNmYiJ9.8vHaT7NMz3mszqg9uqu9hw',
     maxZoom: 18
@@ -26,11 +49,12 @@ window.load = () ->
 
   $ ->
     $('div.rowitem').each ->
+      cur_layer = $(this).parent().attr('index')
       pop_index = $(this).attr('index')
       markers[$(this).attr('index')] = L.marker([
         $(this).attr('latitude')
         $(this).attr('longitude')
-      ]).addTo(map).bindPopup('<b>' + $(this).attr('name') + '</b><br>' + $(this).attr('address') + '<br>' + $(this).attr('city')).on('popupopen', (popup) ->
+      ],{icon: store_images[cur_layer]}).addTo(map).bindPopup('<b>' + $(this).attr('name') + '</b><br>' + $(this).attr('address') + '<br>' + $(this).attr('city')).on('popupopen', (popup) ->
         $('div.rowitem[index="' + pop_index + '"]').addClass('selected-store')
         $('div.side-bar').scrollTo('div.rowitem[index=' + pop_index + ']');
         return
