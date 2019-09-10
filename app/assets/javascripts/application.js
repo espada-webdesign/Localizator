@@ -31,6 +31,10 @@ function get_all_stores_array(){
   return Object.values(stores_names);
 }
 
+function refresh_map_icons(){
+
+}
+
 function refresh_layer_header(){
   $.each($('h2.layer-header'), function( index, header ) {
     var show_h2 = false;
@@ -52,34 +56,45 @@ function refresh_layer_header(){
 function refresh_options(query){
   if (!query.length){
     $.each($('.rowitem'), function( index, field ) {
-      $(field).removeClass('hidden');
-      if(window.markers[$(field).attr('index')]._map == null){
-        window.markers[$(field).attr('index')].addTo(map);
+      if(!$(field).parent().hasClass('hidden')){
+        $(field).removeClass('hidden');
+        if(window.markers[$(field).attr('index')]._map == null){
+          window.markers[$(field).attr('index')].addTo(map);
+        }
+      }
+      else{
+        $(field).addClass('hidden');
+        window.markers[$(field).attr('index')].remove();
       }
     });
   }
   else{
     $.each($('.rowitem'), function( index, field ) {
       var showStore = true;
-      $.each(query.split(' '), function( index2, word ) {
-        var word_included = false;
-        word = word.toLowerCase();
-        if(($(field).attr('address')).toLowerCase().includes(word)){
-          word_included = true;
-        }
-        if(($(field).attr('city')).toLowerCase().includes(word)){
-          word_included = true;
-        }
-        if(($(field).attr('name')).toLowerCase().includes(word)){
-          word_included = true;
-        }
-        if(($(field).attr('postcode')).toLowerCase().includes(word)){
-          word_included = true;
-        }
-        if(!word_included){
-          showStore = false;
-        }
-      });
+      if(!$(field).parent().hasClass('hidden')){
+        $.each(query.split(' '), function( index2, word ) {
+          var word_included = false;
+          word = word.toLowerCase();
+          if(($(field).attr('address')).toLowerCase().includes(word)){
+            word_included = true;
+          }
+          if(($(field).attr('city')).toLowerCase().includes(word)){
+            word_included = true;
+          }
+          if(($(field).attr('name')).toLowerCase().includes(word)){
+            word_included = true;
+          }
+          if(($(field).attr('postcode')).toLowerCase().includes(word)){
+            word_included = true;
+          }
+          if(!word_included){
+            showStore = false;
+          }
+        });
+      }
+      else{
+        showStore = false;
+      }
       if(!showStore){
         $(field).addClass('hidden');
         window.markers[$(field).attr('index')].remove();
@@ -103,6 +118,20 @@ function refresh_options(query){
     var group = new L.featureGroup(defined_markers);
     map.fitBounds(group.getBounds().pad(0.5));
   }
+}
+
+function refresh_dropdown(){
+  var $select = $("#search").selectize();
+  var control = $select[0].selectize;
+  control.clearOptions();
+  $.each($('.rowitem'), function( index, field ) {
+      if(!$(field).hasClass('hidden')){
+       control.addOption({
+         id: $(field).attr('index'),
+         title: $(field).attr('name') + ' ' + $(field).attr('address') + ' ' + $(field).attr('city') +  ' ' + $(field).attr('postcode'),
+       });
+    }
+  });
 }
 
 document.addEventListener('turbolinks:load', function() {
@@ -129,14 +158,7 @@ document.addEventListener('turbolinks:load', function() {
          }, 500);
 
        });
-       var $select = $("#search").selectize();
-       var control = $select[0].selectize;
-       $.each($('.rowitem'), function( index, field ) {
-         control.addOption({
-          id: $(field).attr('index'),
-          title: $(field).attr('name') + ' ' + $(field).attr('address') + ' ' + $(field).attr('city') +  ' ' + $(field).attr('postcode'),
-        });
-       });
+       refresh_dropdown();
      },
      render: {
         option_create: function(data, escape) {
@@ -217,6 +239,10 @@ document.addEventListener('turbolinks:load', function() {
        else{
          $('div.layer-stores').removeClass('hidden');
        }
+       $select = $("#search").selectize();
+       control = $select[0].selectize;
+       refresh_options(control.getValue());
+       refresh_dropdown();
      },
    });
 
