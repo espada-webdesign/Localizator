@@ -16,6 +16,21 @@
 //= require_tree .
 //= stub zload
 
+
+
+function get_store_name(name){
+  if(name){
+    return stores_names[name];
+  }
+  else{
+    return others_string;
+  }
+}
+
+function get_all_stores_array(){
+  return Object.values(stores_names);
+}
+
 function refresh_layer_header(){
   $.each($('h2.layer-header'), function( index, header ) {
     var show_h2 = false;
@@ -152,6 +167,57 @@ document.addEventListener('turbolinks:load', function() {
           $('.rowitem').removeClass("hidden");
         }
     }
+   });
+
+   $('#layer-search').selectize({
+     valueField: 'title',
+     labelField: 'title',
+     searchField: 'title',
+     create: false,
+     maxItems: 1,
+     onInitialize: function() {
+       selectize = this;
+       var $select = $("#layer-search").selectize();
+       var control = $select[0].selectize;
+       var all_stores = get_all_stores_array();
+       control.addOption({
+         id: 0,
+         title: all_stores_string
+       });
+       var i = 1;
+       for(i = 1; i < all_stores.length+1; i++){
+         control.addOption({
+           id: i,
+           title: all_stores[i-1]
+         });
+       }
+       control.addOption({
+         id: i,
+         title: others_string
+       });
+       control.setValue(all_stores_string);
+     },
+     onChange: function() {
+       var $select = $("#layer-search").selectize();
+       var control = $select[0].selectize;
+       var cur_store = control.getValue();
+       if (cur_store != all_stores_string && cur_store){
+         $('div.layer-stores').addClass('hidden');
+         if(cur_store == others_string){
+           $('div.layer-stores[index=' + others_key + ']').removeClass('hidden');
+         }
+         else{
+           $.each(stores_names, function(key, val){
+             if (val == cur_store){
+               $('div.layer-stores[index=' + key + ']').removeClass('hidden');
+             }
+           });
+         }
+       }
+       else{
+         $('div.layer-stores').removeClass('hidden');
+       }
+     },
    });
 
    document.addEventListener("turbolinks:before-cache", function() {

@@ -1,22 +1,28 @@
 
 -#.navbar
   -#%a.right(href="#") Domů
+- stores_names = {"weleda" => "Weleda", "dm" => "DM", "dr_max" => "Dr. Max", "benu" => "BENU", "lloyds" => "Lloyds", "rossmann" => "Rossmann", "mojelekarna" => "Moje lékárna", "globus" => "Globus", "lekaren" => "Lékáreň"};
+- others_str = 'Ostatní řetězce'
+- others_key = "others"
 .row
   .side-column-content
     .search-wrapper
       %form#search-form
-        %input#search{:placeholder => "Hledat...", :required => true}/
-        %button.close{:type => "reset"}X
-      -#.search-icon-container
-        -#%i.material-icons search
+        %input#search{:placeholder => "Hledat", :required => true}/
+        %input#layer-search{:placeholder => "Řetězec", :required => true}/
       .search-results
 
     .side-bar
       - layer = ''
       - @ps_stores.group_by(&:layer).each do |layer, stores|
-        %div.layer-stores
+        - if layer.to_s.empty?
+          -layer= "others"
+        %div.layer-stores{:index => layer}
           %h2.layer-header
-            = layer
+            - if stores_names[layer].to_s.empty?
+              = others_str
+            - else
+              = stores_names[layer]
           - stores.each do |store|
             %div.rowitem{:index => store.id, :latitude=>store.latitude, :longitude=>store.longitude, :address=>store.address1, :city=>store.city, :name=>store.name, :country=>store.id_country, :postcode=>store.postcode}
               .rowitem_content
@@ -32,5 +38,11 @@
   .main
     / div musi mit specifikovanou vysku v css
     #mapid
+
+:javascript
+  const stores_names = JSON.parse('#{raw(stores_names.to_json)}');
+  const all_stores_string = 'Všechny řetězce';
+  const others_string = '#{others_str}';
+  const others_key = '#{others_key}';
 
 = javascript_include_tag 'zload'
